@@ -58,3 +58,6 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+.header__nav a {
+  text-decoration: none;
+}
