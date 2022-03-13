@@ -1,26 +1,33 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
-// import { auth } from '../../firebase';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from '../../firebase';
+// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import './Login.css'
 
 const Login = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const signin = (e) => {
         e.preventDefault()
+        auth.signInWithEmailAndPassword(email, password)
+            .then(auth => {
+                navigate('/')
+            })
+            .catch(error => alert(error.message))
     }
 
     const register = (e) => {
         e.preventDefault()
 
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
+        
+        auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
-                console.log(user);
+                if (user) {
+                    navigate('/')
+                }
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -47,7 +54,7 @@ const Login = () => {
                     <h5>Password</h5>
                     <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
 
-                    <button type='submit' className='login__signInButton' onSubmit={signin}>Sign In</button>
+                    <button type='submit' className='login__signInButton' onClick={signin}>Sign In</button>
                 </form>
 
                 <p>
@@ -55,7 +62,7 @@ const Login = () => {
                     see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
                 </p>
 
-                <button className='login__registerButton' onSubmit={register}>Create your Amazon Account</button>
+                <button className='login__registerButton' onClick={register}>Create your Amazon Account</button>
             </div>
         </div>
     )

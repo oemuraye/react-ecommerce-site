@@ -28,6 +28,7 @@
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
   padding: 2px;
+  cursor: pointer;
 }
 .product__rating {
   display: flex;
