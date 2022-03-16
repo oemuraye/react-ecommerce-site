@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Checkout from "./components/checkout/Checkout";
+import Payment from "./components/checkout/payment/Payment";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login";
 import { auth } from "./firebase";
@@ -35,6 +36,7 @@ function App() {
           <Route path='/' exact element={<Home/>} />
           <Route path='/login' exact element={<Login/>} />
           <Route path='/checkout' exact element={<Checkout/>} />
+          <Route path='/payment' exact element={<Payment/>} />
         </Routes>
       </div>
     </BrowserRouter>
